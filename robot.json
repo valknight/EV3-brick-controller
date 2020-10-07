@@ -1,0 +1,7 @@
+{
+    "comment": "This file is designed to be used for development purposes. Please copy this file and place it in the directory above this, and modify for your fleet of EV3s",
+    "name": "Development Machine 💻",
+    "id": 9001,
+    "key": "susxrobogals",
+    "host": "http://127.0.0.1:8000"
+}
