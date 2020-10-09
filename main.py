@@ -67,13 +67,14 @@ def refresh_display(buttons):
         oldest_time = time() * 1000 - oldest_time
 
 def handle_movement(buttons):
-    x, z = buttons['coords'][0], buttons['coords'][2]
-    z *= speed
-    x *= (speed * turn_speed_multiplier)
-    if z:
-        x *= forward_turn_multiplier
-    if do_movement:
-        drive.on(x, z)
+    if running_on_robot:
+        x, z = buttons['coords'][0], buttons['coords'][2]
+        z *= speed
+        x *= (speed * turn_speed_multiplier)
+        if z:
+            x *= forward_turn_multiplier
+        if do_movement:
+            drive.on(x, z)
 
 
 while True:
@@ -81,7 +82,8 @@ while True:
         j = get_commands()
         buttons = j['buttons']
         refresh_display(buttons)
-        handle_movement(j)
+        if running_on_robot:
+            handle_movement(j)
     except Exception as e:
         if debug:
             print(e)
