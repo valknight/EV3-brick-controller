@@ -21,8 +21,6 @@ speed = 40
 # The following import is used 
 if running_on_robot:
     from ev3dev2.motor import list_motors, LargeMotor, OUTPUT_A, OUTPUT_B, OUTPUT_C, MoveJoystick
-
-if running_on_robot:
     # Change output_B and C respectively if you wire your wheels differently
     left_wheel, right_wheel = OUTPUT_B, OUTPUT_C
     arm_port = OUTPUT_A
