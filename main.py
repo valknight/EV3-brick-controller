@@ -23,7 +23,8 @@ def get_robot_data():
         with open('robot.json', 'r') as f:
             return json.loads(f.read())
     except FileNotFoundError:
-        raise FileNotFoundError("Could not find file in either current directory or higher level directory")
+        raise FileNotFoundError(
+            "Could not find file in either current directory or higher level directory")
 
 
 data = get_robot_data()
