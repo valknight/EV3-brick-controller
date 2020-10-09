@@ -10,7 +10,7 @@ if running_on_robot:
     console = Console()
     console.set_font(font)
 else:
-    from urllib.request import urlopen
+    from requests import request
 
 
 def get_robot_data():
