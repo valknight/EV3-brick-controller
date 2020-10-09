@@ -31,22 +31,24 @@ data = get_robot_data()
 robotName = data['name']
 robotId = data['id']
 robotKey = data['key']
+commands = data.get('commands', [{"name": "No bindings!", "code": "noBinding", "binding": "a"}])
 host = data['host']
 
 postData = json.dumps({
     "robotId": robotId,
     "robotName": robotName,
-    "robotKey": robotKey})
+    "robotKey": robotKey,
+    "commands": commands})
 
 buttons = []
 oldest_time = "/"
+
 
 def get_commands():
     # TODO: fix this for local debugging purposes
     # TODO: revert to old urequests way of getting data - it was more reliable, and the latency difference isn't noticiable
     s = request("POST", "{}/robot".format(host), json=postData)
     return s.json()
-
 
 
 def refresh_display(buttons):
@@ -58,6 +60,8 @@ def refresh_display(buttons):
     print("ID {}".format(robotId))
     print("Name: {}".format(robotName))
     print("Latency: {}ms".format(oldest_time))
+    print("Buttons: {}".format(
+        ','.join([button['code'] for button in buttons])))
     # Handle latency calculation
     if len(buttons) > 0:
         oldest_time = buttons[0]['time']
@@ -65,6 +69,7 @@ def refresh_display(buttons):
             if button['time'] < oldest_time:
                 oldest_time = button['time']
         oldest_time = time() * 1000 - oldest_time
+
 
 def handle_movement(buttons):
     if running_on_robot:
